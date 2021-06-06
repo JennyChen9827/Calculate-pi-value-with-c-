@@ -1,0 +1,35 @@
+//*********original code fragment
+// n and arrays a, b and c are declared , initialized prior to loop
+for(i = 1; i < n ; i++)
+	for(k = 1; k < n ; k++)
+		for(j = 1; j < n ; j++)
+		{
+			if(n - 20 > i){
+				a[j][k][i] = b[j][k][i] + c[j - i][k][i] ;
+				c[j][k][i] = 2 * b[j][k][i + 1];
+			}
+			else{
+				a[j][k][i] = b[j][k][i] - c[j - i][k][i] ;
+			}
+		}
+		
+//explain why model archetichecture works this way:
+//model architectures optimise performance by utilize CPU data caching. 
+//CPU reads data from memory by pages. 
+//If we can access contionously data in the same page, then CPU does not have to read the page from memory very frequently.		
+
+
+//*********modified code fragment
+// n and arrays a, b and c are declared , initialized prior to loop
+for(j = 1; j < n ; j++)
+	for(k = 1; k < n ; k++)
+		for(i = 1; i < n ; i++)
+		{
+			if(n - 20 > i){
+				a[j][k][i] = b[j][k][i] + c[j - i][k][i] ;
+				c[j][k][i] = 2 * b[j][k][i + 1];
+			}
+			else{
+				a[j][k][i] = b[j][k][i] - c[j - i][k][i] ;
+			}
+		}
